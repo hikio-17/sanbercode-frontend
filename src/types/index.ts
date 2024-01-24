@@ -9,3 +9,9 @@ export interface CustomButtonProps {
    rigthIcon?: string;
    isDisabled?: boolean;
 }
+
+export interface RegisterRequest {
+   email: string;
+   fullname: string;
+   password: string;
+}
