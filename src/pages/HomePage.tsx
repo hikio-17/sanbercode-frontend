@@ -1,4 +1,5 @@
 import BookCard from "../components/BookCard"
+import CustomButton from "../components/CustomButton"
 import CustomFilter from "../components/CustomFilter"
 import Footer from "../components/Footer"
 import Hero from "../components/Hero"
@@ -36,6 +37,14 @@ const HomePage = () => {
               <BookCard />
               <BookCard />
               <BookCard />
+            </div>
+
+            <div className="w-full flex-center gap-5 mt-10">
+              <CustomButton
+                title='Show More'
+                btnType='button'
+                containerStyles='bg-primary-blue rounded-full text-white'
+              />
             </div>
           </section>
         </div>
