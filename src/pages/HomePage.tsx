@@ -1,6 +1,8 @@
+import CustomFilter from "../components/CustomFilter"
 import Hero from "../components/Hero"
 import Navbar from "../components/Navbar"
 import SearchBar from "../components/SearchBar"
+import { maxYear, minYear } from "../constants"
 
 const HomePage = () => {
   return (
@@ -19,6 +21,11 @@ const HomePage = () => {
 
           <div className="home__filters">
             <SearchBar />
+
+            <div className="home__filter-container">
+              <CustomFilter title='Min Year' options={minYear} />
+              <CustomFilter title='Max Year' options={maxYear} />
+            </div>
           </div>
         </div>
       </main>

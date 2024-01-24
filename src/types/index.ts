@@ -10,6 +10,16 @@ export interface CustomButtonProps {
    isDisabled?: boolean;
 }
 
+export interface OptionProps {
+   title: string;
+   value: number | null;
+}
+
+export interface CustomFilterProps {
+   title: string;
+   options: OptionProps[];
+}
+
 export interface RegisterRequest {
    email: string;
    fullname: string;
