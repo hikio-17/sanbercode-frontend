@@ -6,6 +6,9 @@ export default {
   mode: "jit",
   theme: {
     extend: {
+      lineHeight: {
+        "12": "3rem"
+      },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
