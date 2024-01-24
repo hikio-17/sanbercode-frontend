@@ -1,6 +1,7 @@
 import { } from 'react-icons';
 import { IoBookOutline } from 'react-icons/io5';
 import RegisterInput from '../components/RegisterInput';
+import { Link } from 'react-router-dom';
 
 function RegisterPage() {
    return (
@@ -18,7 +19,7 @@ function RegisterPage() {
         <p className="text-sm">
           Already have an account?
           {' '}
-          <a href="/" className="text-teal-700">Login</a>
+          <Link to="/login" className="text-teal-700">Login</Link>
         </p>
       </article>
     </section>
