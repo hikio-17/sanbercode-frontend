@@ -1,3 +1,4 @@
+import BookCard from "../components/BookCard"
 import CustomFilter from "../components/CustomFilter"
 import Hero from "../components/Hero"
 import Navbar from "../components/Navbar"
@@ -27,6 +28,15 @@ const HomePage = () => {
               <CustomFilter title='Max Year' options={maxYear} />
             </div>
           </div>
+
+          <section>
+            <div className="home__books-wrapper">
+              <BookCard />
+              <BookCard />
+              <BookCard />
+              <BookCard />
+            </div>
+          </section>
         </div>
       </main>
     </>

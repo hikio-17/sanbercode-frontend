@@ -86,7 +86,7 @@ body {
   @apply flex justify-start flex-wrap items-center gap-2;
 }
 
-.home__cars-wrapper {
+.home__books-wrapper {
   @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14;
 }
 
@@ -118,3 +118,50 @@ body {
   @apply absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm;
 }
 /* END: Custom Filter styles */
+
+
+/* START: Car Card styles */
+.book-card {
+  @apply flex flex-col justify-start items-start text-black-100 bg-primary-blue-100 hover:bg-white hover:shadow-md rounded-3xl;
+}
+
+.book-card__content {
+  @apply w-full flex justify-start items-start gap-2;
+}
+
+.book-card__content-title {
+  @apply text-[22px] leading-[26px] font-bold capitalize;
+}
+
+.book-card__price {
+  @apply flex mt-3 text-[32px] leading-[38px] font-extrabold;
+}
+
+.book-card__price-dollar {
+  @apply self-start text-[14px] leading-[17px] font-semibold;
+}
+
+.book-card__price-day {
+  @apply self-end text-[14px] leading-[17px] font-medium;
+}
+
+.book-card__image {
+  @apply relative w-full h-40 my-3 object-contain;
+}
+
+.book-card__icon-container {
+  @apply flex group-hover:invisible w-full justify-between text-grey;
+}
+
+.book-card__icon {
+  @apply flex flex-col justify-center items-center gap-2;
+}
+
+.book-card__icon-text {
+  @apply text-[14px] leading-[17px];
+}
+
+.book-card__btn-container {
+  @apply hidden group-hover:flex absolute bottom-0 w-full z-10;
+}
+/* END: Car Card styles */
