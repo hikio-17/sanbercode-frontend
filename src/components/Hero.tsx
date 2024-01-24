@@ -1,4 +1,3 @@
-import { IoBookOutline } from "react-icons/io5";
 import CustomButton from "./CustomButton";
 
 function Hero() {
