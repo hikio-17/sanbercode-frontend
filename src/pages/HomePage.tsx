@@ -1,5 +1,6 @@
 import BookCard from "../components/BookCard"
 import CustomFilter from "../components/CustomFilter"
+import Footer from "../components/Footer"
 import Hero from "../components/Hero"
 import Navbar from "../components/Navbar"
 import SearchBar from "../components/SearchBar"
@@ -39,6 +40,7 @@ const HomePage = () => {
           </section>
         </div>
       </main>
+      <Footer />
     </>
   )
 }
