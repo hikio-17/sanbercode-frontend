@@ -1,6 +1,8 @@
+import RegisterPage from "./pages/RegisterPage";
+
 function App() {
   return (
-    <h6>Hello World</h6>
+    <RegisterPage />
   )
 }
 
