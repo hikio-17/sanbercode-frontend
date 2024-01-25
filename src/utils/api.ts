@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { LoginRequest, RegisterRequest } from "../types";
+import { BookItem, LoginRequest, RegisterRequest } from "../types";
 
 const api = (() => {
    const BASE_URL = 'http://localhost:8080';
@@ -100,6 +100,26 @@ const api = (() => {
       return { status, message };
    }
 
+   async function addBook(book) {
+      const response = await _fetchWithAuth(`${BASE_URL}/books`, {
+         method: 'POST',
+         headers: {
+            'Content-Type': 'multipart/form-data'
+         },
+         body: book
+      });
+
+      const responseJson = await response.json();
+
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      return { status, message }
+   }
+
    return {
       getAccessToken,
       putAccessToken,
@@ -107,6 +127,7 @@ const api = (() => {
       removeBookById,
       register,
       login,
+      addBook,
    }
 })();
 
