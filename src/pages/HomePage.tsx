@@ -12,26 +12,37 @@ import { useEffect, useState } from "react"
 import { asynCAddBook, asyncReceiveAllBook, asyncRemoveBookById } from "../stores/books/action"
 import { BookItem } from './../types/index';
 import AddBook from "../components/AddBook"
+import { asyncAddCategory, asyncReceiveAllCategories } from "../stores/categories/action"
+import FilterCategory from "../components/FilterCategory"
+import AddCategory from "../components/AddCategory"
 
 const HomePage = () => {
   const {
-    books = []
+    books = [],
+    categories = [],
   } = useSelector((states) => states);
   const dispatch = useDispatch();
 
   const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const [isOpenAddCategory, setIsOpenAddCategory] = useState(false);
 
   useEffect(() => {
-    dispatch(asyncReceiveAllBook())
+    dispatch(asyncReceiveAllBook());
+    dispatch(asyncReceiveAllCategories());
   }, [dispatch])
 
   const onRemoveBook = (bookId: number) => {
-      dispatch(asyncRemoveBookById(bookId));
+    dispatch(asyncRemoveBookById(bookId));
   }
 
   const onAddBook = (book: BookItem) => {
     dispatch(asynCAddBook(book))
   }
+
+  const onAddCategory = (name: string) => {
+    dispatch(asyncAddCategory(name));
+  }
+
   return (
     <>
       <Navbar />
@@ -48,18 +59,27 @@ const HomePage = () => {
 
           <div className="home__filters">
             <SearchBar />
-
             <div className="home__filter-container">
+              <FilterCategory title="Category" options={categories} />
               <CustomFilter title='Min Year' options={minYear} />
               <CustomFilter title='Max Year' options={maxYear} />
             </div>
-  
-            <CustomButton 
-              title="Add Book"
-              containerStyles="bg-blue-700 rounded-xl"
-              textStyles="text-white"
-              handleClick={() => setIsOpenAdd(true)}
-            />
+
+            <div className="grid grid-cols-2 place-content-end gap-3">
+              <CustomButton
+                title="Add Book"
+                containerStyles="bg-blue-700 rounded-xl"
+                textStyles="text-white"
+                handleClick={() => setIsOpenAdd(true)}
+              />
+              <CustomButton
+                title="Add Category"
+                containerStyles="bg-blue-700 rounded-xl"
+                textStyles="text-white"
+                handleClick={() => setIsOpenAddCategory(true)}
+              />
+            </div>
+
           </div>
 
           <section>
@@ -80,6 +100,7 @@ const HomePage = () => {
         </div>
 
         {isOpenAdd && <AddBook isOpenAdd={isOpenAdd} closeModalAdd={() => setIsOpenAdd(false)} addBook={onAddBook} />}
+        {isOpenAddCategory && <AddCategory isOpenAddCategory={isOpenAddCategory} closeModalAddCategory={() => setIsOpenAddCategory(false)} addCategory={onAddCategory} />}
       </main>
       <Footer />
     </>

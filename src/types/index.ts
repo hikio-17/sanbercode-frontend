@@ -14,6 +14,13 @@ export interface BookItem {
    category_id: number;
 }
 
+export interface CategoryItem {
+   id: number;
+   name: string;
+   created_at: Date;
+   updated_at: Date;
+}
+
 export interface CustomButtonProps {
    title: string;
    containerStyles?: string;
@@ -64,4 +71,10 @@ export interface AddBookProps {
    isOpenAdd: boolean;
    closeModalAdd: () => void;
    addBook: (book: BookItem) => void
+}
+
+export interface AddCategoryProps {
+   isOpenAddCategory: boolean;
+   closeModalAddCategory: () => void;
+   addCategory: (name: string) => void
 }

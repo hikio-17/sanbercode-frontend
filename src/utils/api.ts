@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { BookItem, LoginRequest, RegisterRequest } from "../types";
+import { LoginRequest, RegisterRequest } from "../types";
 
 const api = (() => {
    const BASE_URL = 'http://localhost:8080';
@@ -124,9 +124,10 @@ const api = (() => {
    async function addCategory(name: string) {
       const response = await _fetchWithAuth(`${BASE_URL}/categories`, {
          method: 'POST',
-         body: JSON.stringify({
-            name,
-         }),
+         headers: {
+            'Content-Type': 'application/json',
+         },
+         body: JSON.stringify({name}),
       });
 
       const responseJson = await response.json();
@@ -142,7 +143,7 @@ const api = (() => {
    }
 
    async function getAllCategories () {
-      const response = await fetch(`${BASE_URL}/categoris`, {
+      const response = await fetch(`${BASE_URL}/categories`, {
          method: 'GET',
       });
       const responseJson = await response.json();
@@ -189,7 +190,7 @@ const api = (() => {
       return responseJson;
    }
 
-   async function findCategoryById(categoryId) {
+   async function findCategoryById(categoryId: number) {
       const response = await fetch(`${BASE_URL}/categories/${categoryId}/books`, {
          method: 'GET',
       });
