@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useDispatch, useSelector } from "react-redux"
 import BookCard from "../components/BookCard"
 import CustomButton from "../components/CustomButton"
@@ -8,18 +9,22 @@ import Navbar from "../components/Navbar"
 import SearchBar from "../components/SearchBar"
 import { maxYear, minYear } from "../constants"
 import { useEffect } from "react"
-import { asyncReceiveAllBook } from "../stores/books/action"
+import { asyncReceiveAllBook, asyncRemoveBookById } from "../stores/books/action"
 import { BookItem } from './../types/index';
 
 const HomePage = () => {
   const {
-    books =[]
+    books = []
   } = useSelector((states) => states);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(asyncReceiveAllBook())
   }, [dispatch])
+
+  const onRemoveBook = (bookId: number) => {
+      dispatch(asyncRemoveBookById(bookId));
+  }
   return (
     <>
       <Navbar />
@@ -46,7 +51,7 @@ const HomePage = () => {
           <section>
             <div className="home__books-wrapper">
               {books.map((book: BookItem) => (
-                <BookCard book={book} key={book.id} />
+                <BookCard book={book} key={book.id} remove={onRemoveBook} />
               ))}
             </div>
 

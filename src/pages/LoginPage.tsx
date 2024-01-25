@@ -11,7 +11,7 @@ function LoginPage() {
 
    const onLogin = async ({ email, password }: LoginRequest)=> {
       try {
-         const { status, message} = await api.login({ email, password });
+         const { status, message } = await api.login({ email, password });
 
          if (status === 'success') {
             SweetAlert({

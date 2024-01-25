@@ -4,11 +4,12 @@ import { IoCloseCircle } from 'react-icons/io5';
 import CustomButton from './CustomButton';
 import { BookDetailProps } from '../types';
 
-const CarDetail = ({ isOpen, closeModal, book }: BookDetailProps) => {
+const BookDetail = ({ isOpenDetail, closeModalDetail, book, remove, openEdit }: BookDetailProps) => {
+
    return (
       <div className='h-full'>
-         <Transition appear show={isOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={closeModal} >
+         <Transition appear show={isOpenDetail} as={Fragment}>
+            <Dialog as="div" className="relative z-10" onClose={closeModalDetail} >
                <Transition.Child
                   as={Fragment}
                   enter="ease-out duration-300"
@@ -36,7 +37,7 @@ const CarDetail = ({ isOpen, closeModal, book }: BookDetailProps) => {
                            <button
                               type="button"
                               className='absolute top-2 right-2 z-10 w-fit p-2 bg-primary-blue-100 rounded-full'
-                              onClick={closeModal}
+                              onClick={closeModalDetail}
                            >
                               <IoCloseCircle />
                            </button>
@@ -72,11 +73,16 @@ const CarDetail = ({ isOpen, closeModal, book }: BookDetailProps) => {
                                  title='Edit'
                                  textStyles='text-xl text-white'
                                  containerStyles='bg-orange-500 w-full rounded'
+                                 handleClick={() => openEdit()}
                               />
                               <CustomButton 
                                  title='Delete'
                                  textStyles='text-white'
                                  containerStyles='bg-red-500 w-full rounded'
+                                 handleClick={() => {
+                                    remove(book.id)
+                                    closeModalDetail()
+                                 }}
                               />
                            </div>
                         </Dialog.Panel>
@@ -89,4 +95,4 @@ const CarDetail = ({ isOpen, closeModal, book }: BookDetailProps) => {
    )
 }
 
-export default CarDetail
+export default BookDetail

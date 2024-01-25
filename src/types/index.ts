@@ -46,7 +46,16 @@ export interface LoginRequest {
 }
 
 export interface BookDetailProps {
-   isOpen: boolean;
-   closeModal: () => void;
+   isOpenDetail: boolean;
+   closeModalDetail: () => void;
    book: BookItem;
+   openEdit: () => void;
+   remove: (bookId: number) => void;
+}
+
+export interface BookEditProps {
+   isOpenEdit: boolean;
+   closeModalEdit: () => void;
+   book: BookItem;
+   edit: (data: BookItem) => void;
 }

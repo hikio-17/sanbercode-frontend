@@ -85,10 +85,26 @@ const api = (() => {
       return books;
    }
 
+   async function removeBookById(bookId: number) {
+      const response = await _fetchWithAuth(`${BASE_URL}/books/${bookId}`, {
+         method: 'DELETE',
+      });
+      const responseJson = await response.json();
+
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      return { status, message };
+   }
+
    return {
       getAccessToken,
       putAccessToken,
       getAllBooks,
+      removeBookById,
       register,
       login,
    }
