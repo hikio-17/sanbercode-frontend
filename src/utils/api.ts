@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { BookItem, LoginRequest, RegisterRequest } from "../types";
 
@@ -100,7 +101,7 @@ const api = (() => {
       return { status, message };
    }
 
-   async function addBook(book) {
+   async function addBook(book: any) {
       const response = await _fetchWithAuth(`${BASE_URL}/books`, {
          method: 'POST',
          headers: {
@@ -120,6 +121,91 @@ const api = (() => {
       return responseJson;
    }
 
+   async function addCategory(name: string) {
+      const response = await _fetchWithAuth(`${BASE_URL}/categories`, {
+         method: 'POST',
+         body: JSON.stringify({
+            name,
+         }),
+      });
+
+      const responseJson = await response.json();
+
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      return responseJson;
+
+   }
+
+   async function getAllCategories () {
+      const response = await fetch(`${BASE_URL}/categoris`, {
+         method: 'GET',
+      });
+      const responseJson = await response.json();
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      return responseJson;
+   }
+
+   async function updateCategoryById(name: string, categoryId: number) {
+      const response = await _fetchWithAuth(`${BASE_URL}/categories/${categoryId}`, {
+         method: 'PATCH',
+         body: JSON.stringify({ name }),
+      });
+
+      const responseJson = await response.json();
+
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      return responseJson;
+   }  
+
+
+   async function removeCategoryById(categoryId: number) {
+      const response = await _fetchWithAuth(`${BASE_URL}/categories/${categoryId}`, {
+         method: 'DELETE',
+      });
+
+      const responseJson = await response.json();
+
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      return responseJson;
+   }
+
+   async function findCategoryById(categoryId) {
+      const response = await fetch(`${BASE_URL}/categories/${categoryId}/books`, {
+         method: 'GET',
+      });
+
+      const responseJson = await response.json();
+
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      return responseJson;
+   }
+
+
    return {
       getAccessToken,
       putAccessToken,
@@ -128,6 +214,11 @@ const api = (() => {
       register,
       login,
       addBook,
+      getAllCategories,
+      updateCategoryById,
+      removeCategoryById,
+      addCategory,
+      findCategoryById,
    }
 })();
 
