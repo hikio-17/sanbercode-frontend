@@ -4,7 +4,7 @@ import { IoCloseCircle } from 'react-icons/io5';
 import CustomButton from './CustomButton';
 import { BookDetailProps } from '../types';
 
-const CarDetail = ({ isOpen, closeModal }: BookDetailProps) => {
+const CarDetail = ({ isOpen, closeModal, book }: BookDetailProps) => {
    return (
       <div className='h-full'>
          <Transition appear show={isOpen} as={Fragment}>
@@ -42,28 +42,28 @@ const CarDetail = ({ isOpen, closeModal }: BookDetailProps) => {
                            </button>
                            
                            <div>
-                              <img src="harry-potter.jpg" alt="book" style={{ height: '40%'}} className='w-full' />
+                              <img src={`${book.image_url}`} alt="book" style={{ height: '40%'}} className='w-full' />
                               
-                              <h3 className='text-2xl font-extrabold mt-5'>Harry Potter and the Chamber of Secrets</h3>
+                              <h3 className='text-2xl font-extrabold mt-5'>{book.title}</h3>
                               <div className='my-4'>
                                  <h5 className='text-gray-400'>Description</h5>
-                                 <p className='w-full'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit vero esse dolorum veritatis ab pariatur ut consequuntur optio temporibus aperiam. Ut error quae tempore quibusdam sunt neque maxime quis ducimus?</p>
+                                 <p className='w-full'>{book.description}</p>
                               </div>
                               <div className='flex justify-between my-3'>
                                  <h5 className='text-gray-400'>Release year</h5>
-                                 <p>1988</p>
+                                 <p>{book.release_year}</p>
                               </div>
                               <div className='flex justify-between my-3'>
                                  <h5 className='text-gray-400'>Total Page</h5>
-                                 <p>300 hal</p>
+                                 <p>{book.total_page} hal</p>
                               </div>
                               <div className='flex justify-between my-3'>
                                  <h5 className='text-gray-400'>Price</h5>
-                                 <p>$ 30,00</p>
+                                 <p>$ {book.price}</p>
                               </div>
                               <div className='flex justify-between my-3'>
                                  <h5 className='text-gray-400'>Category</h5>
-                                 <p>Fantasy</p>
+                                 <p>{book.category_id}</p>
                               </div>
                            </div>
 

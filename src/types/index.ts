@@ -1,5 +1,19 @@
 import { MouseEventHandler } from "react";
 
+export interface BookItem {
+   id: number;
+   title: string;
+   description: string;
+   image_url: string;
+   release_year: number;
+   price: string;
+   total_page: number;
+   thickness: string;
+   created_at: Date;
+   updated_at: Date;
+   category_id: number;
+}
+
 export interface CustomButtonProps {
    title: string;
    containerStyles?: string;
@@ -34,4 +48,5 @@ export interface LoginRequest {
 export interface BookDetailProps {
    isOpen: boolean;
    closeModal: () => void;
+   book: BookItem;
 }

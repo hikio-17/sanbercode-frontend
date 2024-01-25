@@ -69,9 +69,26 @@ const api = (() => {
       };
    }
 
+   async function getAllBooks() {
+      const response = await fetch(`${BASE_URL}/books`);
+
+      const responseJson = await response.json();
+
+      const { status, message } = responseJson;
+
+      if (status !== 'success') {
+         throw new Error(message);
+      }
+
+      const { data: { books } } = responseJson;
+
+      return books;
+   }
+
    return {
       getAccessToken,
       putAccessToken,
+      getAllBooks,
       register,
       login,
    }

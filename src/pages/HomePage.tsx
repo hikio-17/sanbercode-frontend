@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux"
 import BookCard from "../components/BookCard"
 import CustomButton from "../components/CustomButton"
 import CustomFilter from "../components/CustomFilter"
@@ -6,8 +7,19 @@ import Hero from "../components/Hero"
 import Navbar from "../components/Navbar"
 import SearchBar from "../components/SearchBar"
 import { maxYear, minYear } from "../constants"
+import { useEffect } from "react"
+import { asyncReceiveAllBook } from "../stores/books/action"
+import { BookItem } from './../types/index';
 
 const HomePage = () => {
+  const {
+    books =[]
+  } = useSelector((states) => states);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(asyncReceiveAllBook())
+  }, [dispatch])
   return (
     <>
       <Navbar />
@@ -33,10 +45,9 @@ const HomePage = () => {
 
           <section>
             <div className="home__books-wrapper">
-              <BookCard />
-              <BookCard />
-              <BookCard />
-              <BookCard />
+              {books.map((book: BookItem) => (
+                <BookCard book={book} key={book.id} />
+              ))}
             </div>
 
             <div className="w-full flex-center gap-5 mt-10">
