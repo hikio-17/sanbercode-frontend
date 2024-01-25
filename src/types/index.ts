@@ -76,5 +76,7 @@ export interface AddBookProps {
 export interface AddCategoryProps {
    isOpenAddCategory: boolean;
    closeModalAddCategory: () => void;
-   addCategory: (name: string) => void
+   addCategory: (name: string) => void;
+   categories: CategoryItem[];
+   removeCategory: (id: number) => void;
 }

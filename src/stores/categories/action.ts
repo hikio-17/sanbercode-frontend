@@ -31,6 +31,15 @@ function addCategoryActionCreator(category: CategoryItem) {
    }
 }
 
+function removeCategoryByIdActionCreator(id: number) {
+   return {
+      type: ActionType.REMOVE_CATEGORY,
+      payload: {
+         id
+      }
+   }
+}
+
 function asyncAddCategory(name: string) {
    return async (dispatch: Dispatch) => {
       try {
@@ -68,9 +77,31 @@ function asyncReceiveAllCategories() {
    }
 }
 
+function asyncRemoveCategoryById(id: number) {
+   return async (dispatch: Dispatch) => {
+      try {
+         const { status, message } = await api.removeCategoryById(id);
+
+         if (status === 'success') {
+            SweetAlert({
+               status,
+               text: message,
+            });
+            dispatch(removeCategoryByIdActionCreator(id))
+         }
+      } catch (error: any) {
+         SweetAlert({
+            status: 'error',
+            text: error.message,
+         })
+      }
+   }
+}
+
 export {
    asyncReceiveAllCategories,
    asyncAddCategory,
+   asyncRemoveCategoryById,
    ActionType,
 }
 

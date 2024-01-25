@@ -14,7 +14,7 @@ function categoriesReducer(categories = [], action: CategoryAction) {
       case ActionType.ADD_CATEGORY:
          return [...categories, action.payload.category];
       case ActionType.REMOVE_CATEGORY:
-         return categories.filter((category: CategoryItem) => category.id !== action.payload.categoryId)
+         return categories.filter((category: CategoryItem) => category.id !== action.payload.id)
       default:
          return categories;
    }

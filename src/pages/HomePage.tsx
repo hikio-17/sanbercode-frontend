@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
 import { asynCAddBook, asyncReceiveAllBook, asyncRemoveBookById } from "../stores/books/action"
 import { BookItem } from './../types/index';
 import AddBook from "../components/AddBook"
-import { asyncAddCategory, asyncReceiveAllCategories } from "../stores/categories/action"
+import { asyncAddCategory, asyncReceiveAllCategories, asyncRemoveCategoryById } from "../stores/categories/action"
 import FilterCategory from "../components/FilterCategory"
 import AddCategory from "../components/AddCategory"
 
@@ -41,6 +41,10 @@ const HomePage = () => {
 
   const onAddCategory = (name: string) => {
     dispatch(asyncAddCategory(name));
+  }
+
+  const onRemoveCategory = (id: number) => {
+    dispatch(asyncRemoveCategoryById(id));
   }
 
   return (
@@ -100,7 +104,15 @@ const HomePage = () => {
         </div>
 
         {isOpenAdd && <AddBook isOpenAdd={isOpenAdd} closeModalAdd={() => setIsOpenAdd(false)} addBook={onAddBook} />}
-        {isOpenAddCategory && <AddCategory isOpenAddCategory={isOpenAddCategory} closeModalAddCategory={() => setIsOpenAddCategory(false)} addCategory={onAddCategory} />}
+        {isOpenAddCategory && 
+        <AddCategory
+          isOpenAddCategory={isOpenAddCategory}
+          closeModalAddCategory={() => setIsOpenAddCategory(false)}
+          addCategory={onAddCategory}
+          categories={categories}
+          removeCategory={onRemoveCategory}
+        />
+        }
       </main>
       <Footer />
     </>

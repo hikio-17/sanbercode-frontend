@@ -174,8 +174,8 @@ const api = (() => {
    }  
 
 
-   async function removeCategoryById(categoryId: number) {
-      const response = await _fetchWithAuth(`${BASE_URL}/categories/${categoryId}`, {
+   async function removeCategoryById(id: number) {
+      const response = await _fetchWithAuth(`${BASE_URL}/categories/${id}`, {
          method: 'DELETE',
       });
 
