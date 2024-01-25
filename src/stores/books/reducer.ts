@@ -11,6 +11,8 @@ function booksReducer(books = [], action: ReceiveAllBookAction) {
    switch (action.type) {
       case ActionType.RECEIVE_ALL_BOOK:
          return action.payload.books;
+      case ActionType.ADD_BOOK:
+         return [...books, action.payload.book];
       case ActionType.REMOVE_BOOK:
          return books.filter((book: BookItem) => book.id !== action.payload.bookId)
       default:

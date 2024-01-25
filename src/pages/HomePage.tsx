@@ -8,9 +8,10 @@ import Hero from "../components/Hero"
 import Navbar from "../components/Navbar"
 import SearchBar from "../components/SearchBar"
 import { maxYear, minYear } from "../constants"
-import { useEffect } from "react"
-import { asyncReceiveAllBook, asyncRemoveBookById } from "../stores/books/action"
+import { useEffect, useState } from "react"
+import { asynCAddBook, asyncReceiveAllBook, asyncRemoveBookById } from "../stores/books/action"
 import { BookItem } from './../types/index';
+import AddBook from "../components/AddBook"
 
 const HomePage = () => {
   const {
@@ -18,12 +19,18 @@ const HomePage = () => {
   } = useSelector((states) => states);
   const dispatch = useDispatch();
 
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+
   useEffect(() => {
     dispatch(asyncReceiveAllBook())
   }, [dispatch])
 
   const onRemoveBook = (bookId: number) => {
       dispatch(asyncRemoveBookById(bookId));
+  }
+
+  const onAddBook = (book: BookItem) => {
+    dispatch(asynCAddBook(book))
   }
   return (
     <>
@@ -46,6 +53,13 @@ const HomePage = () => {
               <CustomFilter title='Min Year' options={minYear} />
               <CustomFilter title='Max Year' options={maxYear} />
             </div>
+  
+            <CustomButton 
+              title="Add Book"
+              containerStyles="bg-blue-700 rounded-xl"
+              textStyles="text-white"
+              handleClick={() => setIsOpenAdd(true)}
+            />
           </div>
 
           <section>
@@ -64,6 +78,8 @@ const HomePage = () => {
             </div>
           </section>
         </div>
+
+        {isOpenAdd && <AddBook isOpenAdd={isOpenAdd} closeModalAdd={() => setIsOpenAdd(false)} addBook={onAddBook} />}
       </main>
       <Footer />
     </>

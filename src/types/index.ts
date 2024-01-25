@@ -59,3 +59,9 @@ export interface BookEditProps {
    book: BookItem;
    edit: (data: BookItem) => void;
 }
+
+export interface AddBookProps {
+   isOpenAdd: boolean;
+   closeModalAdd: () => void;
+   addBook: (book: BookItem) => void
+}

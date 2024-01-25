@@ -117,7 +117,7 @@ const api = (() => {
          throw new Error(message);
       }
 
-      return { status, message }
+      return responseJson;
    }
 
    return {

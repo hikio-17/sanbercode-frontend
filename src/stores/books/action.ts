@@ -5,6 +5,7 @@ import api from "../../utils/api"
 import SweetAlert from "../../components/SweetAlert";
 
 const ActionType = {
+   ADD_BOOK: 'ADD_BOOK',
    RECEIVE_ALL_BOOK: 'RECEIVE_ALL_BOOK',
    REMOVE_BOOK: 'REMOVE_BOOK',
 }
@@ -18,11 +19,43 @@ function receiveAllBookActionCreator(books: BookItem[]) {
    }
 }
 
+function addBookActionCreator(book: BookItem) {
+   return {
+      type: ActionType.ADD_BOOK,
+      payload: {
+         book,
+      }
+   }
+}
+
+
 function removeBookByIdActionCreator(bookId: number) {
    return {
       type: ActionType.REMOVE_BOOK,
       payload: {
          bookId
+      }
+   }
+}
+
+function asynCAddBook(book: BookItem) {
+   return async (dispatch: Dispatch) =>  {
+      try {
+         const { status, message, data } = await api.addBook(book);
+
+         if (status === 'success') {
+            dispatch(addBookActionCreator(data.book));
+            SweetAlert({
+               status,
+               text: message,
+            });
+         }
+      } catch (error: any) {
+         SweetAlert({
+            status: 'error',
+            text: error.message
+         })
+         
       }
    }
 }
@@ -62,4 +95,5 @@ export {
    asyncReceiveAllBook,
    receiveAllBookActionCreator,
    asyncRemoveBookById,
+   asynCAddBook,
 }
